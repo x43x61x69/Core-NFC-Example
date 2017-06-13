@@ -2,6 +2,8 @@
 
 **Core NFC Example** is an example project which demonstrate the usage of iOS 11 Core NFC framework.
 
+![preview](preview.gif)
+
 ## Features
 
 - Read NDEF compatiable NFC Tags.
