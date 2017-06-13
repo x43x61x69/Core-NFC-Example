@@ -11,6 +11,7 @@
 - Xcode 9.
 - iOS 11.
 - An iPhone 7 or iPhone 7 Plus.
+- An Apple Developer Account and enables NFC reading for your codesigning App ID.
 
 ### License
 
