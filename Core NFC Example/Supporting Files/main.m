@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  main.m
 //  Core NFC Example
 //
 //  The MIT License (MIT)
@@ -26,11 +26,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
-
-@end
-
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
