@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,9 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drj-F8-DQp">
-                                <rect key="frame" x="24" y="318" width="327" height="30"/>
+                                <rect key="frame" x="24" y="597" width="327" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fJW-Xz-JT5"/>
+                                    <constraint firstAttribute="height" constant="50" id="fJW-Xz-JT5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="Scan NFC Tag">
@@ -34,16 +34,32 @@
                                     <action selector="scan:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x1j-wU-6c2"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYV-Nf-rn5">
+                                <rect key="frame" x="0.0" y="28" width="375" height="561"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="GUw-lr-Jcy"/>
+                            <constraint firstItem="drj-F8-DQp" firstAttribute="top" secondItem="ZYV-Nf-rn5" secondAttribute="bottom" constant="8" id="OEv-fv-B5a"/>
+                            <constraint firstItem="ZYV-Nf-rn5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="T8T-Ua-vLF"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UH7-pu-5Cp"/>
-                            <constraint firstItem="drj-F8-DQp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="csb-nf-hV5"/>
+                            <constraint firstItem="ZYV-Nf-rn5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="16" id="Y3h-TE-g4E"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-8" id="cyQ-9o-4PT"/>
+                            <constraint firstItem="ZYV-Nf-rn5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qNy-Ov-Pr4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="drj-F8-DQp" secondAttribute="bottom" constant="20" id="sPV-rz-Tb5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logView" destination="ZYV-Nf-rn5" id="0RD-kT-eLL"/>
+                        <outlet property="scanButton" destination="drj-F8-DQp" id="YH0-sb-hfZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

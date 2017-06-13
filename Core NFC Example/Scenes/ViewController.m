@@ -31,7 +31,11 @@
 
 @interface ViewController () <NFCNDEFReaderSessionDelegate>
 
-@property (nonatomic, strong) NFCNDEFReaderSession *session;
+@property (nonatomic, strong)   NFCNDEFReaderSession *session;
+@property (nonatomic, strong)   NFCNDEFReaderSession *alert;
+
+@property (nonatomic, weak)     IBOutlet UIButton *scanButton;
+@property (nonatomic, weak)     IBOutlet UITextView *logView;
 
 @end
 
@@ -40,11 +44,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _scanButton.layer.cornerRadius = 4.f;
+    _scanButton.layer.borderWidth  = 1.f;
+    _scanButton.layer.borderColor  = _scanButton.currentTitleColor.CGColor;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)dealloc
 {
     [_session invalidateSession];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - NFCNDEFReaderSessionDelegate
@@ -53,33 +71,13 @@
 {
     NSLog(@"Error: %@", [error debugDescription]);
     
-    switch (error.code) {
-        case NFCReaderSessionInvalidationErrorUserCanceled:
-        case NFCReaderSessionInvalidationErrorSessionTimeout:
-            // Do not display alert when error was caused by:
-            // - User cancellation
-            // - Timeout
-            return;
-        default:
-            break;
-    }
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                   message:[NSString stringWithFormat:@"%@ (%ld)",
-                                                                            [error localizedDescription],
-                                                                            error.code]
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Restart"
-                                                            style:UIAlertActionStyleCancel
-                                                          handler:^(UIAlertAction *action){
-                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                  [self beginSession];
-                                                              });
-                                                          }];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert
-                       animated:YES
-                     completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _logView.text = [NSString stringWithFormat:@"[%@] Error: %@ (%ld)\n%@",
+                         [NSDate date],
+                         [error localizedDescription],
+                         error.code,
+                         _logView.text];
+    });
 }
 
 - (void)readerSession:(nonnull NFCNDEFReaderSession *)session didDetectNDEFs:(nonnull NSArray<NFCNDEFMessage *> *)messages
@@ -95,19 +93,15 @@
         }
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Payload"
-                                                                   message:[NSString stringWithFormat:@"%@", data] preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Scan another Tag"
-                                                            style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction *action){
-                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                  [self beginSession];
-                                                              });
-                                                          }];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert
-                       animated:YES
-                     completion:nil];
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _logView.text = [NSString stringWithFormat:@"[%@] Payload: %@ (%@)\n%@",
+                         [NSDate date],
+                         data,
+                         dataString,
+                         _logView.text];
+    });
 }
 
 #pragma mark - Methods
