@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -42,14 +42,48 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLp-aO-8Q8">
+                                <rect key="frame" x="-8" y="529" width="391" height="60"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QZ6-jU-U2E">
+                                    <rect key="frame" x="0.0" y="0.0" width="391" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2W-de-hM5">
+                                            <rect key="frame" x="16" y="15" width="80" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="Pdd-Of-J2H"/>
+                                                <constraint firstAttribute="width" constant="80" id="vBj-hx-2Wt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="Clear"/>
+                                            <connections>
+                                                <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sde-5D-4NB"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="F2W-de-hM5" firstAttribute="centerY" secondItem="QZ6-jU-U2E" secondAttribute="centerY" id="9U2-oR-prI"/>
+                                        <constraint firstItem="F2W-de-hM5" firstAttribute="leading" secondItem="QZ6-jU-U2E" secondAttribute="leading" constant="16" id="Tce-q6-GL8"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ytH-AH-BR5"/>
+                                </constraints>
+                                <vibrancyEffect>
+                                    <blurEffect style="dark"/>
+                                </vibrancyEffect>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="zLp-aO-8Q8" firstAttribute="trailing" secondItem="ZYV-Nf-rn5" secondAttribute="trailing" constant="8" id="0CV-kd-4GF"/>
+                            <constraint firstItem="zLp-aO-8Q8" firstAttribute="leading" secondItem="ZYV-Nf-rn5" secondAttribute="leading" constant="-8" id="BlF-ph-M7e"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="GUw-lr-Jcy"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="top" secondItem="ZYV-Nf-rn5" secondAttribute="bottom" constant="8" id="OEv-fv-B5a"/>
                             <constraint firstItem="ZYV-Nf-rn5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="T8T-Ua-vLF"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UH7-pu-5Cp"/>
+                            <constraint firstItem="zLp-aO-8Q8" firstAttribute="bottom" secondItem="ZYV-Nf-rn5" secondAttribute="bottom" id="Xlb-Ox-dfj"/>
                             <constraint firstItem="ZYV-Nf-rn5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="16" id="Y3h-TE-g4E"/>
                             <constraint firstItem="drj-F8-DQp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-8" id="cyQ-9o-4PT"/>
                             <constraint firstItem="ZYV-Nf-rn5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qNy-Ov-Pr4"/>

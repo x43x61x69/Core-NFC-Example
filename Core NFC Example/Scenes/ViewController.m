@@ -71,6 +71,11 @@
 {
     NSLog(@"Error: %@", [error debugDescription]);
     
+    if (error.code == NFCReaderSessionInvalidationErrorUserCanceled) {
+        // User cancellation.
+        return;
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         _logView.text = [NSString stringWithFormat:@"[%@] Error: %@ (%ld)\n%@",
                          [NSDate date],
@@ -112,7 +117,7 @@
     = [[NFCNDEFReaderSession alloc] initWithDelegate:self
                                                queue:dispatch_queue_create(NULL,
                                                                            DISPATCH_QUEUE_CONCURRENT)
-                            invalidateAfterFirstRead:YES];
+                            invalidateAfterFirstRead:NO];
     [_session beginSession];
 }
 
@@ -121,6 +126,11 @@
 - (IBAction)scan:(id)sender
 {
     [self beginSession];
+}
+
+- (IBAction)clear:(id)sender
+{
+    _logView.text = @"";
 }
 
 @end
