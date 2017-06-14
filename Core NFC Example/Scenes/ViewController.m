@@ -87,26 +87,34 @@
 
 - (void)readerSession:(nonnull NFCNDEFReaderSession *)session didDetectNDEFs:(nonnull NSArray<NFCNDEFMessage *> *)messages
 {
-    NSMutableData *data = [NSMutableData new];
-    
     for (NFCNDEFMessage *message in messages) {
         for (NFCNDEFPayload *payload in message.records) {
-            if (payload.payload) {
-                NSLog(@"Payload: %@", payload.payload);
-                [data appendData:payload.payload];
-            }
+            NSLog(@"Payload: %@", payload);
+            const NSDate *date = [NSDate date];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _logView.text = [NSString stringWithFormat:
+                                 @"[%@] Identifier: %@ (%@)\n"
+                                 @"[%@] Type: %@ (%@)\n"
+                                 @"[%@] Format: %d\n"
+                                 @"[%@] Payload: %@ (%@)\n%@",
+                                 date,
+                                 payload.identifier,
+                                 [[NSString alloc] initWithData:payload.identifier
+                                                       encoding:NSASCIIStringEncoding],
+                                 date,
+                                 payload.type,
+                                 [[NSString alloc] initWithData:payload.type
+                                                       encoding:NSASCIIStringEncoding],
+                                 date,
+                                 payload.typeNameFormat,
+                                 date,
+                                 payload.payload,
+                                 [[NSString alloc] initWithData:payload.payload
+                                                       encoding:NSASCIIStringEncoding],
+                                 _logView.text];
+            });
         }
     }
-    
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _logView.text = [NSString stringWithFormat:@"[%@] Payload: %@ (%@)\n%@",
-                         [NSDate date],
-                         data,
-                         dataString,
-                         _logView.text];
-    });
 }
 
 #pragma mark - Methods
